@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:src="@drawable/no_net"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="当前网络状况不佳"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:textColor="@color/bgColor_overlay_black"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_width="80dp"
+        android:text="点击重试"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:textColor="@color/bgColor_overlay_black"
+        android:id="@+id/btn_retry"
+        android:textStyle="bold"
+        android:background="@drawable/loginbutton_back"
+        android:layout_marginTop="10dp"
+        android:layout_height="40dp" />
+</LinearLayout>

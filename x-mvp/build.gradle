@@ -1,0 +1,80 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.github.dreamaner'
+
+android {
+
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    //MD设计相关
+    compile rootProject.ext.dependencies["appcompat-v7"]
+    compile rootProject.ext.dependencies["support-v4"]
+    compile rootProject.ext.dependencies["design"]
+    //卡片布局
+    compile rootProject.ext.dependencies["card-view"]
+    //annotations依赖注释
+    compile rootProject.ext.dependencies["annotations"]
+    //recyclerview引用
+    compile rootProject.ext.dependencies["recyclerview-v7"]
+    //butterknife使用
+    compile rootProject.ext.dependencies["butterknife"]
+    compile rootProject.ext.dependencies["butterknife-apt"]
+    //gson数据转换
+    compile rootProject.ext.dependencies["gson"]
+    //retrofit异步库相关
+    compile rootProject.ext.dependencies["retrofit"]
+    compile rootProject.ext.dependencies["retrofit-converter-gson"]
+    compile rootProject.ext.dependencies["retrofit-adapter-rxjava"]
+    //OKhttp引用
+    compile rootProject.ext.dependencies["okhttp3"]
+    //rx相关
+    compile rootProject.ext.dependencies["rxlifecycle"]
+    compile rootProject.ext.dependencies["rxlifecycle-android"]
+    compile rootProject.ext.dependencies["rxlifecycle-components"]
+    compile rootProject.ext.dependencies["rxpermissions"]
+    compile rootProject.ext.dependencies["rxandroid"]
+    compile rootProject.ext.dependencies["rxjava"]
+    //picasso图片加载
+    compile rootProject.ext.dependencies["picasso"]
+    //glide图片加载
+    compile rootProject.ext.dependencies["glide"]
+    //litepal数据库
+    compile rootProject.ext.dependencies["litepal"]
+    //stetho调试
+    compile rootProject.ext.dependencies["stetho"]
+    compile rootProject.ext.dependencies["stetho-okhttp3"]
+    //FlexboxLayout布局
+    compile rootProject.ext.dependencies["flexbox"]
+    //PicassoPalette对加载图片的监听
+    compile rootProject.ext.dependencies["picasso-palette"]
+    //依赖布局
+    compile rootProject.ext.dependencies["constraint-layout"]
+    //kit工具包
+    compile project(':kit')
+}
+
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+    task sourcesJar(type: Jar) {
+        from android.sourceSets.main.java.srcDirs
+        classifier = 'sources'
+    }
+
+    artifacts {
+        archives sourcesJar
+    }

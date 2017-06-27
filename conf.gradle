@@ -1,0 +1,74 @@
+ext {
+
+    android = [
+
+            compileSdkVersion: 25,
+            buildToolsVersion: "25.0.2",
+
+            minSdkVersion    : 21,
+            targetSdkVersion : 25,
+
+            versionCode      : 1,
+            versionName      : '1.0.0',
+
+            Design           : '26.0.0-alpha1',
+            VSupportSdk      : '25.3.1',
+            VRetrofitSdk     : "2.2.0",
+            VOkhttp          : "3.4.2",
+            VRxlifecycle     : "2.0.1",
+            VButterKnife     : "8.4.0",
+            VEventBus        : "3.0.0",
+            VGlide           : "3.7.0",
+            VPicasso         : "2.5.2",
+            VLitePal         : "1.5.0",
+            VGson            : "2.6.2",
+            VLeakCanary      : "1.5.1",
+            VRxpermissions   : "0.9.4@aar",
+            VCardView        : "24.2.1",
+            VStetho          : "1.5.0",
+            VMDProgressBar   : "1.4.1",
+            VFlexboxLayout   : "0.3.0-alpha4",
+            VDebugDatabase   : "1.0.0",
+            VPicassoPalette  : "2.0.0",
+            VConstraint      : "1.0.2",
+            VAnimation       : "2.4.0"
+    ]
+    dependencies = [
+
+            "constraint-layout"          : "com.android.support.constraint:constraint-layout:${android["VConstraint"]}",
+            "appcompat-v7"               : "com.android.support:appcompat-v7:${android["VSupportSdk"]}",
+            "support-v4"                 : "com.android.support:support-v4:${android["VSupportSdk"]}",
+            "design"                     : "com.android.support:design:${android["Design"]}",
+            "annotations"                : "com.android.support:support-annotations:${android["VSupportSdk"]}",
+            "recyclerview-v7"            : "com.android.support:recyclerview-v7:${android["VSupportSdk"]}",
+            "butterknife"                : "com.jakewharton:butterknife:${android["VButterKnife"]}",
+            "butterknife-apt"            : "com.jakewharton:butterknife-compiler:${android["VButterKnife"]}",
+            "eventbus"                   : "org.greenrobot:eventbus:${android["VEventBus"]}",
+            "glide"                      : "com.github.bumptech.glide:glide:${android["VGlide"]}",
+            "picasso"                    : "com.squareup.picasso:picasso:${android["VPicasso"]}",
+            "picasso-palette"            : "com.github.florent37:picassopalette:${android["VPicassoPalette"]}",
+            "litepal"                    : "org.litepal.android:core:${android["VLitePal"]}",
+            "gson"                       : "com.google.code.gson:gson:${android["VGson"]}",
+            "rxandroid"                  : "io.reactivex.rxjava2:rxandroid:${android[ "VRxlifecycle"]}",
+            "rxjava"                     : "io.reactivex.rxjava2:rxjava:${android[ "VRxlifecycle"]}",
+            "retrofit"                   : "com.squareup.retrofit2:retrofit:${android["VRetrofitSdk"]}",
+            "retrofit-converter-gson"    : "com.squareup.retrofit2:converter-gson:${android["VRetrofitSdk"]}",
+            "retrofit-adapter-rxjava"    : "com.squareup.retrofit2:adapter-rxjava2:${android["VRetrofitSdk"]}",
+            "okhttp3-logging-interceptor": "com.squareup.okhttp3:logging-interceptor:${android["VOkhttp"]}",
+            "okhttp3"                    : "com.squareup.okhttp3:okhttp:${android["VOkhttp"]}",
+            "rxlifecycle"                : "com.trello.rxlifecycle2:rxlifecycle:${android["VRxlifecycle"]}",
+            "rxlifecycle-android"        : "com.trello.rxlifecycle2:rxlifecycle-android:${android["VRxlifecycle"]}",
+            "rxlifecycle-components"     : "com.trello.rxlifecycle2:rxlifecycle-components:${android["VRxlifecycle"]}",
+            "rxpermissions"              : "com.tbruyelle.rxpermissions2:rxpermissions:${android["VRxpermissions"]}",
+            "canary-debug"               : "com.squareup.leakcanary:leakcanary-android:${android["VLeakCanary"]}",
+            "canary-release"             : "com.squareup.leakcanary:leakcanary-android-no-op:${android["VLeakCanary"]}",
+            "card-view"                  : "com.android.support:cardview-v7:${android["VCardView"]}",
+            "stetho"                     : "com.facebook.stetho:stetho:${android["VStetho"]}",
+            "stetho-okhttp3"             : "com.facebook.stetho:stetho-okhttp3:${android["VStetho"]}",
+            "mdprogress"                 : "me.zhanghai.android.materialprogressbar:library:${android["VMDProgressBar"]}",
+            "flexbox"                    : "com.google.android:flexbox:${android["VFlexboxLayout"]}",
+            "nineoldandroids"            : "com.nineoldandroids:library:${android["VAnimation"]}"
+
+    ]
+
+}

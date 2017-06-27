@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ShowHidePasswordEditText">
+        <attr name="drawable_hide" format="integer" />
+        <attr name="drawable_show" format="integer" />
+        <attr name="monospace" format="boolean" />
+        <attr name="tint_color" format="color" />
+    </declare-styleable>
+
+    <!-- Tag ImageView -->
+    <declare-styleable name="SimpleTagImageView">
+        <attr name="simple_corner_distance" format="dimension" />
+        <attr name="simple_tag_width" format="dimension" />
+        <attr name="simple_tag_background_color" format="color" />
+        <attr name="simple_tag_text" format="string" />
+        <attr name="simple_tag_textSize" format="dimension" />
+        <attr name="simple_tag_textColor" format="color" />
+        <attr name="simple_tag_orientation" format="enum">
+            <enum name="left_top" value="0" />
+            <enum name="right_top" value="1" />
+            <enum name="left_bottom" value="2" />
+            <enum name="right_bottom" value="3" />
+        </attr>
+        <attr name="simple_tag_enable" format="boolean" />
+        <!-- 圆角 -->
+        <attr name="simple_tag_round_radius" format="dimension" />
+    </declare-styleable>
+
+    <!-- Switch Button -->
+    <declare-styleable name="SwitchButton">
+        <attr name="swBorderWidth" format="reference|dimension" />
+        <attr name="offBorderColor" format="reference|color" />
+        <attr name="offColor" format="reference|color" />
+        <attr name="onColor" format="reference|color" />
+        <attr name="spotColor" format="reference|color" />
+        <attr name="animate" format="reference|boolean" />
+        <attr name="isRect" format="reference|boolean" />
+    </declare-styleable>
+
+    <!-- Check Box -->
+    <declare-styleable name="SmoothCheckBox">
+        <attr name="smoothCheckBox_duration" format="integer" />
+        <attr name="smoothCheckBox_stroke_width" format="reference|dimension" />
+        <attr name="smoothCheckBox_color_tick" format="reference|color" />
+        <attr name="smoothCheckBox_color_checked" format="reference|color" />
+        <attr name="smoothCheckBox_color_unchecked" format="reference|color" />
+        <attr name="smoothCheckBox_color_unchecked_stroke" format="reference|color" />
+        <attr name="smoothCheckBox_is_rect" format="reference|boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="GifView">
+        <attr name="gif" format="reference" />
+        <attr name="paused" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="CustomTheme">
+        <attr name="gifViewStyle" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="SearchEditText">
+        <attr name="drawableStart" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="SVCircleProgressBar">
+        <attr name="svRoundColor" format="color" />
+        <attr name="svRoundProgressColor" format="color" />
+        <attr name="svRoundWidth" format="dimension"></attr>
+        <attr name="max" format="integer"></attr>
+        <attr name="style">
+            <enum name="STROKE" value="0"></enum>
+            <enum name="FILL" value="1"></enum>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="ShimmerView">
+        <attr name="reflectionColor" format="color" />
+        <attr name="model" format="integer">
+            <enum name="Normal" value="0"></enum>
+            <enum name="START_RIGHT_AWAY" value="1"></enum>
+        </attr>
+        <attr name="repeatCount" format="integer" />
+        <attr name="duration" format="integer" />
+        <attr name="startDelay" format="integer" />
+        <attr name="direction" format="integer" >
+            <enum name="ANIMATION_DIRECTION_LTR" value="0"></enum>
+            <enum name="ANIMATION_DIRECTION_RTL" value="1"></enum>
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="XTabLayout">
+        <attr name="ddIndicatorHeight" format="dimension" />
+        <attr name="ddIndicatorColor" format="color" />
+        <attr name="ddAnimatedIndicator" format="enum">
+            <enum name="defaultMove" value="0" />
+            <enum name="pointMove" value="1" />
+            <enum name="lineMove" value="2" />
+            <enum name="pointFade" value="3" />
+            <enum name="lineFade" value="4" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="LikeButton">
+        <attr name="icon_type" format="string" />
+        <attr name="icon_size" format="dimension|reference"/>
+        <attr name="like_drawable" format="reference" />
+        <attr name="unlike_drawable" format="reference" />
+        <attr name="dots_primary_color" format="color|reference" />
+        <attr name="dots_secondary_color" format="color|reference" />
+        <attr name="circle_start_color" format="color|reference" />
+        <attr name="circle_end_color" format="color|reference" />
+        <attr name="liked" format="boolean"/>
+        <attr name="is_enabled" format="boolean"/>
+        <attr name="anim_scale_factor" format="float"/>
+    </declare-styleable>
+
+    <!-- These top three attributes are not accessible to library users -->
+    <attr name="md_divider" format="color" />
+
+    <!-- Accessible global theming attributes -->
+    <attr name="md_dark_theme" format="boolean" />
+    <attr name="md_background_color" format="color" />
+
+    <attr name="md_icon" format="reference" />
+    <attr name="md_icon_max_size" format="dimension" />
+    <attr name="md_icon_limit_icon_to_default_size" format="boolean" />
+
+    <attr name="md_title_color" format="color" />
+    <attr name="md_content_color" format="color" />
+    <attr name="md_link_color" format="color" />
+
+    <attr name="md_positive_color" format="color" />
+    <attr name="md_neutral_color" format="color" />
+    <attr name="md_negative_color" format="color" />
+    <attr name="md_widget_color" format="color" />
+
+    <attr name="md_item_color" format="color" />
+    <attr name="md_divider_color" format="color" />
+    <attr name="md_list_selector" format="reference" />
+
+    <attr name="md_btn_stacked_selector" format="reference" />
+    <attr name="md_btn_positive_selector" format="reference" />
+    <attr name="md_btn_neutral_selector" format="reference" />
+    <attr name="md_btn_negative_selector" format="reference" />
+
+    <attr name="md_btn_ripple_color" format="color" />
+
+    <attr name="md_title_gravity" format="enum">
+        <enum name="start" value="0" />
+        <enum name="center" value="1" />
+        <enum name="end" value="2" />
+    </attr>
+
+    <attr name="md_content_gravity" format="enum">
+        <enum name="start" value="0" />
+        <enum name="center" value="1" />
+        <enum name="end" value="2" />
+    </attr>
+
+    <attr name="md_btnstacked_gravity" format="enum">
+        <enum name="start" value="0" />
+        <enum name="center" value="1" />
+        <enum name="end" value="2" />
+    </attr>
+
+    <attr name="md_items_gravity" format="enum">
+        <enum name="start" value="0" />
+        <enum name="center" value="1" />
+        <enum name="end" value="2" />
+    </attr>
+
+    <attr name="md_buttons_gravity" format="enum">
+        <enum name="start" value="0" />
+        <enum name="center" value="1" />
+        <enum name="end" value="2" />
+    </attr>
+
+    <declare-styleable name="MDRootLayout">
+        <attr name="md_reduce_padding_no_title_no_buttons" format="boolean" />
+    </declare-styleable>
+
+    <attr name="md_medium_font" format="string" />
+    <attr name="md_regular_font" format="string" />
+
+    <declare-styleable name="Preference">
+        <attr name="useStockLayout" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="XBanner">
+        <attr name="isAutoPlay" format="boolean"/>
+        <attr name="AutoPlayTime" format="integer|reference"/>
+        <attr name="pointNormal" format="color|reference"/>
+        <attr name="pointSelect" format="color|reference"/>
+        <attr name="pointsVisibility" format="boolean"/>
+        <attr name="pointsPosition" format="enum">
+            <enum name="LEFT" value="0"/>
+            <enum name="CENTER" value="1"/>
+            <enum name="RIGHT" value="2"/>
+        </attr>
+        <attr name="pointsContainerBackground" format="reference|color"/>
+        <attr name="pointContainerPosition" format="enum">
+            <enum name="TOP" value="10"/>
+            <enum name="BOTTOM" value="12"/>
+        </attr>
+        <!-- 指示点容器左右内间距 -->
+        <attr name="pointContainerLeftRightPadding" format="dimension"/>
+        <!-- 指示点上下内间距 -->
+        <attr name="pointTopBottomPadding" format="dimension"/>
+        <!-- 指示点左右内间距 -->
+        <attr name="pointLeftRightPadding" format="dimension"/>
+        <!-- 提示文案的文字颜色 -->
+        <attr name="tipTextColor" format="reference|color"/>
+        <!-- 提示文案的文字大小 -->
+        <attr name="tipTextSize" format="dimension"/>
+        <!--是否是数字指示器-->
+        <attr name="isShowNumberIndicator" format="boolean"/>
+        <!-- 数字指示器背景 -->
+        <attr name="numberIndicatorBacgroud" format="reference" />
+        <!-- 当只有一页数据时是否显示指示器，默认值为false -->
+        <attr name="isShowIndicatorOnlyOne" format="boolean" />
+        <!-- 图片切换速度 -->
+        <attr name="pageChangeDuration" format="integer" />
+    </declare-styleable>
+</resources>
