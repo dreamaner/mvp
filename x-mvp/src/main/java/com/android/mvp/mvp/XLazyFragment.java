@@ -191,5 +191,9 @@ public abstract class XLazyFragment<P extends IPresent>
             contentLayout.showError();
         }
     }
+    //返回网络状态
+    public static int showState(int state){
 
+        return state;
+    }
 }

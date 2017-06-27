@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.android.kit.view.tab.XTabLayout;
 import com.android.mvp.base.XFragmentAdapter;
+import com.android.mvp.log.XLog;
 import com.android.mvp.mvp.XActivity;
 import com.android.xmvp.R;
 
@@ -37,13 +38,14 @@ public class MainActivity extends XActivity {
 
     XFragmentAdapter adapter;
 
-
     @Override
     public void initData(Bundle savedInstanceState) {
         setUpToolBar(true,toolbar, "mvp");
 //        setSupportActionBar(toolbar);
 //        setImmersionBar(R.color.colorPrimary);
 //        initImmersionBar();
+        bindNetService();
+        XLog.i("---","服务开启");
         fragmentList.clear();
         fragmentList.add(HomeFragment.newInstance());
         fragmentList.add(GanhuoFragment.newInstance());
@@ -79,6 +81,7 @@ public class MainActivity extends XActivity {
         switch (item.getItemId()) {
             case R.id.action_droid:
                 AboutActivity.launch(context);
+                XLog.i("---","服务暂停");
                 break;
         }
         return super.onOptionsItemSelected(item);

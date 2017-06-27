@@ -19,6 +19,7 @@ import com.android.mvp.R;
 import com.android.mvp.XDroidConf;
 import com.android.mvp.event.BusProvider;
 import com.android.mvp.kit.KnifeKit;
+
 import com.android.mvp.kit.StateView;
 import com.android.mvp.net.NetError;
 import com.android.mvp.recycleview.XRecyclerContentLayout;
@@ -230,5 +231,10 @@ public abstract class XFragment<P extends IPresent> extends RxFragment implement
             contentLayout.errorView(errorView);
             contentLayout.showError();
         }
+    }
+    //返回网络状态
+    public static int showState(int state){
+
+        return state;
     }
 }

@@ -28,6 +28,7 @@ import com.android.mvp.R;
 import com.android.mvp.XDroidConf;
 import com.android.mvp.event.BusProvider;
 import com.android.mvp.kit.KnifeKit;
+
 import com.android.mvp.kit.StateView;
 import com.android.mvp.log.XLog;
 import com.android.mvp.net.NetError;
@@ -53,6 +54,7 @@ public abstract class XActivity<P extends IPresent> extends RxAppCompatActivity 
     private RxPermissions rxPermissions;
 
     public StateView errorView;
+
     private Unbinder unbinder;
 
     @Override
@@ -196,7 +198,12 @@ public abstract class XActivity<P extends IPresent> extends RxAppCompatActivity 
     public void bindEvent() {
 
     }
-
+    public void bindNetService(){
+        context.startService(new Intent(this, NetworkService.class));
+    }
+    public void unBindNetService(){
+        context.stopService(new Intent(this,NetworkService.class));
+    }
     @Override
     public void showDialog(String msg) {
 
@@ -231,8 +238,9 @@ public abstract class XActivity<P extends IPresent> extends RxAppCompatActivity 
         ImmersionBar.with(this).transparentBar().init();
     }
     public void  showError(XRecyclerContentLayout contentLayout,NetError error){
-        if (errorView == null)
+        if (errorView == null){
             errorView = new StateView(this);
+        }
         if (error != null) {
             switch (error.getType()) {
                 case NetError.ParseError:
@@ -262,5 +270,41 @@ public abstract class XActivity<P extends IPresent> extends RxAppCompatActivity 
             contentLayout.errorView(errorView);
             contentLayout.showError();
         }
+
+    }
+
+    public int showState(int state){
+        switch (state){
+            case -1:
+                new MaterialDialog.Builder(context)
+                    .title("提示")
+                    .content("网络已经断开")
+                    .canceledOnTouchOutside(false)
+                    .positiveText("确定")
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog,
+                            @NonNull DialogAction which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+                break;
+            case 1:
+                break;
+            case 2:
+                new MaterialDialog.Builder(context)
+                    .title("提示")
+                    .content("当前网络为2G,加载可能有点慢")
+                    .positiveText("确定")
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog,
+                            @NonNull DialogAction which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+                break;
+        }
+        return state;
     }
 }
