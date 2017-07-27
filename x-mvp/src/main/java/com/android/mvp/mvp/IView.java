@@ -3,6 +3,8 @@ package com.android.mvp.mvp;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import com.android.mvp.net.NetError;
+import com.android.mvp.recycleview.XRecyclerContentLayout;
 
 /**
  * Created by Dreamaner on 2017/5/15.
@@ -35,5 +37,8 @@ public interface IView<P> {
     boolean canBack();
 
     void setUpToolBar(boolean able,Toolbar toolbar, String title);
+
+    void  showError(XRecyclerContentLayout contentLayout,NetError error);
+
 }
 

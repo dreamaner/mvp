@@ -204,7 +204,7 @@ public class XStateController extends FrameLayout {
         }
         this.errorView = errorView;
         addView(this.errorView);
-        this.errorView.setVisibility(GONE);
+        //this.errorView.setVisibility(GONE);
         return this;
     }
 

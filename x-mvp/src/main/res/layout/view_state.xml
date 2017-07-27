@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:id="@+id/state"
     android:background="#ffffff"
     android:orientation="vertical">
 
@@ -16,9 +17,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="网络错误"
+        android:text="网络错误,点击重试"
         android:textStyle="bold"
-        android:textColor="@color/md_red_A700"
-        android:textSize="16sp" />
+        android:textColor="@color/bgColor_overlay"
+        android:textSize="14sp" />
 
 </LinearLayout>

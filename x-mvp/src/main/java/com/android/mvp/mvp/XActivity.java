@@ -1,13 +1,9 @@
 package com.android.mvp.mvp;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -16,11 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.android.kit.utils.network.NetworkService;
-import com.android.kit.utils.system.AppUtils;
 import com.android.kit.utils.ui.AppManagerUitls;
-import com.android.kit.view.dialog.DialogAction;
-import com.android.kit.view.dialog.GravityEnum;
-import com.android.kit.view.dialog.MaterialDialog;
 import com.android.kit.view.immersion.ImmersionBar;
 import com.android.kit.view.progress.SVProgressHUD;
 
@@ -30,7 +22,6 @@ import com.android.mvp.event.BusProvider;
 import com.android.mvp.kit.KnifeKit;
 
 import com.android.mvp.kit.StateView;
-import com.android.mvp.log.XLog;
 import com.android.mvp.net.NetError;
 import com.android.mvp.recycleview.XRecyclerContentLayout;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -38,14 +29,11 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import butterknife.Unbinder;
 
-import static com.android.kit.utils.network.NetworkUtils.NET_BROADCAST_ACTION;
-import static com.android.kit.utils.network.NetworkUtils.NET_STATE_NAME;
-
 /**
  * Created by Dreamaner on 2017/5/15.
  */
 
-public abstract class XActivity<P extends IPresent> extends RxAppCompatActivity implements IView<P> {
+public abstract class XActivity<P extends IPresent> extends RxAppCompatActivity implements IView<P>,StateView.OnStateViewClickListener {
 
     private VDelegate vDelegate;
     private P p;
@@ -198,12 +186,6 @@ public abstract class XActivity<P extends IPresent> extends RxAppCompatActivity 
     public void bindEvent() {
 
     }
-    public void bindNetService(){
-        context.startService(new Intent(this, NetworkService.class));
-    }
-    public void unBindNetService(){
-        context.stopService(new Intent(this,NetworkService.class));
-    }
     @Override
     public void showDialog(String msg) {
 
@@ -237,6 +219,7 @@ public abstract class XActivity<P extends IPresent> extends RxAppCompatActivity 
         //全屏显示图片
         ImmersionBar.with(this).transparentBar().init();
     }
+    @Override
     public void  showError(XRecyclerContentLayout contentLayout,NetError error){
         if (errorView == null){
             errorView = new StateView(this);
@@ -244,67 +227,38 @@ public abstract class XActivity<P extends IPresent> extends RxAppCompatActivity 
         if (error != null) {
             switch (error.getType()) {
                 case NetError.ParseError:
-                    errorView.setMsg("数据解析异常");
+                    errorView.setMsg("数据解析异常,点击重试");
                     break;
 
                 case NetError.AuthError:
-                    errorView.setMsg("身份验证异常");
+                    errorView.setMsg("身份验证异常,点击重试");
                     break;
 
                 case NetError.BusinessError:
-                    errorView.setMsg("业务异常");
+                    errorView.setMsg("业务异常,点击重试");
                     break;
 
                 case NetError.NoConnectError:
-                    errorView.setMsg("网络无连接");
+                    errorView.setMsg("网络异常,点击重试");
                     break;
 
                 case NetError.NoDataError:
-                    errorView.setMsg("数据为空");
+                    errorView.setMsg("数据为空,点击重试");
                     break;
 
                 case NetError.OtherError:
-                    errorView.setMsg("其他异常");
+                    errorView.setMsg("其他异常,点击重试");
                     break;
             }
+            errorView.setOnItemClickListener(this);
             contentLayout.errorView(errorView);
             contentLayout.showError();
         }
 
     }
 
-    public int showState(int state){
-        switch (state){
-            case -1:
-                new MaterialDialog.Builder(context)
-                    .title("提示")
-                    .content("网络已经断开")
-                    .canceledOnTouchOutside(false)
-                    .positiveText("确定")
-                    .onPositive(new MaterialDialog.SingleButtonCallback() {
-                        @Override
-                        public void onClick(@NonNull MaterialDialog dialog,
-                            @NonNull DialogAction which) {
-                            dialog.dismiss();
-                        }
-                    }).show();
-                break;
-            case 1:
-                break;
-            case 2:
-                new MaterialDialog.Builder(context)
-                    .title("提示")
-                    .content("当前网络为2G,加载可能有点慢")
-                    .positiveText("确定")
-                    .onPositive(new MaterialDialog.SingleButtonCallback() {
-                        @Override
-                        public void onClick(@NonNull MaterialDialog dialog,
-                            @NonNull DialogAction which) {
-                            dialog.dismiss();
-                        }
-                    }).show();
-                break;
-        }
-        return state;
+    @Override
+    public void onStateViewClick() {
+      //网络状态回调监听
     }
 }

@@ -4,9 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
-
+import com.android.kit.utils.toast.ToastUtils;
 import com.android.kit.view.immersion.ImmersionBar;
 import com.android.kit.view.progress.SVProgressHUD;
 import com.android.mvp.R;
@@ -14,19 +15,19 @@ import com.android.mvp.XDroidConf;
 import com.android.mvp.event.BusProvider;
 import com.android.mvp.kit.KnifeKit;
 import com.android.mvp.kit.StateView;
+import com.android.mvp.log.XLog;
 import com.android.mvp.net.NetError;
 import com.android.mvp.recycleview.XRecyclerContentLayout;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.Unbinder;
 
-
 /**
  * Created by Dreamaner on 2017/5/15.
  */
 
 public abstract class XLazyFragment<P extends IPresent>
-        extends LazyFragment implements IView<P> {
+        extends LazyFragment implements IView<P>,StateView.OnStateViewClickListener {
 
     public StateView errorView;
 
@@ -50,6 +51,7 @@ public abstract class XLazyFragment<P extends IPresent>
         }
         bindEvent();
         initData(savedInstanceState);
+        errorView = new StateView(getActivity());
     }
 
     @Override
@@ -61,10 +63,8 @@ public abstract class XLazyFragment<P extends IPresent>
     public void bindEvent() {
 
     }
-
     @Override
     public abstract boolean canBack();
-
     @Override
     public  void setUpToolBar(boolean able, Toolbar toolbar, String title){
         if (able&&toolbar!=null){
@@ -80,14 +80,12 @@ public abstract class XLazyFragment<P extends IPresent>
             actionBar.setTitle(title);
         }
     }
-
     public VDelegate getvDelegate() {
         if (vDelegate == null) {
             vDelegate = VDelegateBase.create(context);
         }
         return vDelegate;
     }
-
     protected P getP() {
         if (p == null) {
             p = newP();
@@ -97,7 +95,6 @@ public abstract class XLazyFragment<P extends IPresent>
         }
         return p;
     }
-
     @Override
     protected void onDestoryLazy() {
         super.onDestoryLazy();
@@ -112,37 +109,30 @@ public abstract class XLazyFragment<P extends IPresent>
         p = null;
         vDelegate = null;
     }
-
-
     protected RxPermissions getRxPermissions() {
         rxPermissions = new RxPermissions(getActivity());
         rxPermissions.setLogging(XDroidConf.DEV);
         return rxPermissions;
     }
-
     @Override
     public int getOptionsMenuId() {
         return 0;
     }
-
     @Override
     public boolean useEventBus() {
         return false;
     }
-
     @Override
     public void showDialog(String msg) {
 
         //显示加载框
         SVProgressHUD.showWithStatus(getContext(),msg);
     }
-
     @Override
     public void hideDialog() {
         //关闭加载框
         SVProgressHUD.dismiss(getContext());
     }
-
     @Override
     public void setImmersionBar(int color) {
         //设置沉浸状态栏的颜色
@@ -151,49 +141,49 @@ public abstract class XLazyFragment<P extends IPresent>
                 .barColor(color)
                 .init();
     }
-
     @Override
     public void initImmersionBar() {
-
         //初始化状态栏
         ImmersionBar.with(getActivity()).init();
     }
+    @Override
     public void  showError(XRecyclerContentLayout contentLayout,NetError error){
-        if (errorView == null)
-            errorView = new StateView(getActivity());
+
         if (error != null) {
+
             switch (error.getType()) {
                 case NetError.ParseError:
-                    errorView.setMsg("数据解析异常");
+                    errorView.setMsg("数据解析异常,点击重试");
                     break;
 
                 case NetError.AuthError:
-                    errorView.setMsg("身份验证异常");
+                    errorView.setMsg("身份验证异常,点击重试");
                     break;
 
                 case NetError.BusinessError:
-                    errorView.setMsg("业务异常");
+                    errorView.setMsg("业务异常,点击重试");
                     break;
 
                 case NetError.NoConnectError:
-                    errorView.setMsg("网络无连接");
+                    errorView.setMsg("网络异常,点击重试");
                     break;
 
                 case NetError.NoDataError:
-                    errorView.setMsg("数据为空");
+                    errorView.setMsg("数据为空,点击重试");
                     break;
 
                 case NetError.OtherError:
-                    errorView.setMsg("其他异常");
+                    errorView.setMsg("其他异常,点击重试");
                     break;
             }
-            contentLayout.errorView(errorView);
-            contentLayout.showError();
+            errorView.setOnItemClickListener(this);
+            contentLayout.errorView(errorView).showError();
         }
-    }
-    //返回网络状态
-    public static int showState(int state){
 
-        return state;
+    }
+    @Override
+    public void onStateViewClick() {
+        //网络状态回调监听
+
     }
 }

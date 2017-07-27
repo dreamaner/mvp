@@ -15,5 +15,4 @@ public interface IBus {
     interface IEvent {
         int getTag();
     }
-
 }

@@ -11,7 +11,7 @@ ext {
             versionCode      : 1,
             versionName      : '1.0.0',
 
-            Design           : '26.0.0-alpha1',
+            VDesign           : '26.0.0-alpha1',
             VSupportSdk      : '25.3.1',
             VRetrofitSdk     : "2.2.0",
             VOkhttp          : "3.4.2",
@@ -31,14 +31,15 @@ ext {
             VDebugDatabase   : "1.0.0",
             VPicassoPalette  : "2.0.0",
             VConstraint      : "1.0.2",
-            VAnimation       : "2.4.0"
+            VAnimation       : "2.4.0",
+            VMultidex        : "1.0.0"
     ]
     dependencies = [
 
             "constraint-layout"          : "com.android.support.constraint:constraint-layout:${android["VConstraint"]}",
             "appcompat-v7"               : "com.android.support:appcompat-v7:${android["VSupportSdk"]}",
             "support-v4"                 : "com.android.support:support-v4:${android["VSupportSdk"]}",
-            "design"                     : "com.android.support:design:${android["Design"]}",
+            "design"                     : "com.android.support:design:${android["VDesign"]}",
             "annotations"                : "com.android.support:support-annotations:${android["VSupportSdk"]}",
             "recyclerview-v7"            : "com.android.support:recyclerview-v7:${android["VSupportSdk"]}",
             "butterknife"                : "com.jakewharton:butterknife:${android["VButterKnife"]}",
@@ -67,7 +68,8 @@ ext {
             "stetho-okhttp3"             : "com.facebook.stetho:stetho-okhttp3:${android["VStetho"]}",
             "mdprogress"                 : "me.zhanghai.android.materialprogressbar:library:${android["VMDProgressBar"]}",
             "flexbox"                    : "com.google.android:flexbox:${android["VFlexboxLayout"]}",
-            "nineoldandroids"            : "com.nineoldandroids:library:${android["VAnimation"]}"
+            "nineoldandroids"            : "com.nineoldandroids:library:${android["VAnimation"]}",
+            "multidex"                   : "com.android.support:multidex:${android["VMultidex"]}"
 
     ]
 

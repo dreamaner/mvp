@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group = 'com.github.dreamaner'
+group = 'com.github.coeussy'
 
 android {
 
@@ -62,6 +62,8 @@ dependencies {
     compile rootProject.ext.dependencies["picasso-palette"]
     //依赖布局
     compile rootProject.ext.dependencies["constraint-layout"]
+    //解决打包是方法数超过65536出现的错误
+    compile rootProject.ext.dependencies["multidex"]
     //kit工具包
     compile project(':kit')
 }

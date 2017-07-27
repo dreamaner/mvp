@@ -80,4 +80,5 @@ public class AboutActivity extends XActivity {
             e.printStackTrace();
         }
     }
+
 }

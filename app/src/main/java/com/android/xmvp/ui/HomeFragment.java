@@ -1,14 +1,11 @@
 package com.android.xmvp.ui;
 
-import android.support.v7.widget.Toolbar;
-
+import com.android.kit.utils.toast.ToastUtils;
 import com.android.mvp.base.SimpleRecAdapter;
 import com.android.mvp.recycleview.RecyclerItemCallback;
 import com.android.mvp.recycleview.XRecyclerView;
 import com.android.xmvp.adapter.HomeAdapter;
 import com.android.xmvp.model.GankResults;
-
-
 
 /**
  * Created by Dreamaner on 2017/5/15.

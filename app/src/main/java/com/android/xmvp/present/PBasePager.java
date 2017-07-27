@@ -1,6 +1,8 @@
 package com.android.xmvp.present;
 
 
+import com.android.kit.utils.toast.ToastUtils;
+import com.android.mvp.log.XLog;
 import com.android.mvp.mvp.XPresent;
 import com.android.mvp.net.ApiSubscriber;
 import com.android.mvp.net.NetError;
@@ -26,22 +28,18 @@ public class PBasePager extends XPresent<BasePagerFragment> {
                 .subscribe(new ApiSubscriber<GankResults>() {
                     @Override
                     protected void onFail(NetError error) {
+                        XLog.i("---","错误调用!"+error.getMessage()+error.getType());
                         getV().showError(error);
 
                     }
-
                     @Override
                     protected void onStart() {
                         super.onStart();
-//                        getV().showDialog("请求中...");
                     }
-
                     @Override
                     public void onComplete() {
                         super.onComplete();
-//                        getV().hideDialog();
                     }
-
                     @Override
                     public void onNext(GankResults gankResults) {
                         getV().showData(page, gankResults);

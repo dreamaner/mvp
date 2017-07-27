@@ -2,12 +2,15 @@ package com.android.xmvp.ui;
 
 import android.os.Bundle;
 
-import android.support.annotation.NonNull;
-import com.android.kit.view.dialog.DialogAction;
-import com.android.kit.view.dialog.MaterialDialog;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import com.android.kit.utils.toast.ToastUtils;
 import com.android.mvp.base.SimpleRecAdapter;
-import com.android.mvp.event.BusProvider;
-import com.android.mvp.kit.StateEvent;
+
 import com.android.mvp.mvp.XLazyFragment;
 import com.android.mvp.net.NetError;
 import com.android.mvp.recycleview.XRecyclerContentLayout;
@@ -33,55 +36,15 @@ public abstract class BasePagerFragment extends XLazyFragment<PBasePager> {
 
     protected static final int MAX_PAGE = 10;
 
-
     @Override
     public void initData(Bundle savedInstanceState) {
         initAdapter();
         getP().loadData(getType(), 1);
         setImmersionBar(R.color.colorPrimaryDark);
-        load();
     }
-    public void load(){
-        BusProvider.getBus().toFlowable(StateEvent.class)
-            .subscribe(new Consumer<StateEvent>() {
-                @Override
-                public void accept(StateEvent stateEvent) throws Exception {
-                    switch (stateEvent.getState()){
-                        case -1:
-                            new MaterialDialog.Builder(context)
-                                .title("提示")
-                                .content("网络已经断开")
-                                .canceledOnTouchOutside(false)
-                                .positiveText("确定")
-                                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                                    @Override
-                                    public void onClick(@NonNull MaterialDialog dialog,
-                                        @NonNull DialogAction which) {
-                                        dialog.dismiss();
-                                    }
-                                }).show();
-                            break;
-                        case 1:
-                            getP().loadData(getType(), 1);
-                            break;
-                        case 2:
-                            new MaterialDialog.Builder(context)
-                                .title("提示")
-                                .content("当前网络为2G,加载可能有点慢")
-                                .positiveText("确定")
-                                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                                    @Override
-                                    public void onClick(@NonNull MaterialDialog dialog,
-                                        @NonNull DialogAction which) {
-                                        dialog.dismiss();
-                                    }
-                                }).show();
-                            break;
-                    }
-                }
-            });
-    }
+
     private void initAdapter() {
+
         setLayoutManager(contentLayout.getRecyclerView());
         contentLayout.getRecyclerView()
                 .setAdapter(getAdapter());
@@ -98,16 +61,7 @@ public abstract class BasePagerFragment extends XLazyFragment<PBasePager> {
                     }
                 });
 
-
-
-//        contentLayout.loadingView(View.inflate(getContext(), R.layout.loading_view, null));
-
         contentLayout.getRecyclerView().useDefLoadMoreView();
-    }
-
-    @Override
-    public boolean useEventBus() {
-        return true;
     }
 
     public abstract SimpleRecAdapter getAdapter();
@@ -135,7 +89,6 @@ public abstract class BasePagerFragment extends XLazyFragment<PBasePager> {
         }
     }
 
-
     @Override
     public int getLayoutId() {
         return R.layout.fragment_base_pager;
@@ -146,5 +99,12 @@ public abstract class BasePagerFragment extends XLazyFragment<PBasePager> {
         return new PBasePager();
     }
 
+    @Override
+    public void onStateViewClick() {
+
+        contentLayout.showLoading();
+        getP().loadData(getType(), 1);
+
+    }
 
 }

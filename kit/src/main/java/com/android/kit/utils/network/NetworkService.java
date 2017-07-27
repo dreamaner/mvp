@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.IBinder;
+import android.util.Log;
 
 /**
  * 网络状态监听服务
@@ -29,18 +30,18 @@ public class NetworkService extends Service {
             NetworkInfo info = connectivityManager.getActiveNetworkInfo();
             if (info == null) {
                 networkBroadCast(context, intent, -1);
-                return;
-            }
-            int type = info.getType();
-            switch (type) {
-                case ConnectivityManager.TYPE_WIFI:
-                    networkBroadCast(context, intent, 1);
-                    break;
-                case ConnectivityManager.TYPE_MOBILE:
-                    networkBroadCast(context, intent, 2);
-                    break;
-                default:
-                    break;
+            }else if (info.isConnected()){
+                int type = info.getType();
+                switch (type) {
+                    case ConnectivityManager.TYPE_WIFI:
+                        networkBroadCast(context, intent, 1);
+                        break;
+                    case ConnectivityManager.TYPE_MOBILE:
+                        networkBroadCast(context, intent, 2);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     };
@@ -50,8 +51,6 @@ public class NetworkService extends Service {
         intent.putExtra(NetworkUtils.NET_STATE_NAME, netState);
         context.sendBroadcast(intent);
     }
-
-
     @Override
     public IBinder onBind(Intent intent) {
         return null;

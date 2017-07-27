@@ -4,14 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 
 import com.android.kit.view.immersion.ImmersionBar;
 import com.android.kit.view.progress.SVProgressHUD;
@@ -29,12 +27,11 @@ import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import butterknife.Unbinder;
 
-
 /**
  * Created by Dreamaner on 2017/5/15.
  */
 
-public abstract class XFragment<P extends IPresent> extends RxFragment implements IView<P> {
+public abstract class XFragment<P extends IPresent> extends RxFragment implements IView<P>,StateView.OnStateViewClickListener {
     public StateView errorView;
 
     private VDelegate vDelegate;
@@ -199,42 +196,44 @@ public abstract class XFragment<P extends IPresent> extends RxFragment implement
         //初始化状态栏
         ImmersionBar.with(getActivity()).init();
     }
+    @Override
     public void  showError(XRecyclerContentLayout contentLayout,NetError error){
         if (errorView == null)
             errorView = new StateView(getActivity());
         if (error != null) {
             switch (error.getType()) {
                 case NetError.ParseError:
-                    errorView.setMsg("数据解析异常");
+                    errorView.setMsg("数据解析异常,点击重试");
                     break;
 
                 case NetError.AuthError:
-                    errorView.setMsg("身份验证异常");
+                    errorView.setMsg("身份验证异常,点击重试");
                     break;
 
                 case NetError.BusinessError:
-                    errorView.setMsg("业务异常");
+                    errorView.setMsg("业务异常,点击重试");
                     break;
 
                 case NetError.NoConnectError:
-                    errorView.setMsg("网络无连接");
+                    errorView.setMsg("网络异常,点击重试");
                     break;
 
                 case NetError.NoDataError:
-                    errorView.setMsg("数据为空");
+                    errorView.setMsg("数据为空,点击重试");
                     break;
 
                 case NetError.OtherError:
-                    errorView.setMsg("其他异常");
+                    errorView.setMsg("其他异常,点击重试");
                     break;
             }
+            errorView.setOnItemClickListener(this);
             contentLayout.errorView(errorView);
             contentLayout.showError();
         }
     }
-    //返回网络状态
-    public static int showState(int state){
+    @Override
+    public void onStateViewClick() {
+        //网络状态回调监听
 
-        return state;
     }
 }

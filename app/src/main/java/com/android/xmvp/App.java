@@ -3,7 +3,7 @@ package com.android.xmvp;
 import android.app.Application;
 import android.content.Context;
 
-
+import android.support.multidex.MultiDex;
 import com.android.kit.utils.system.AppUtils;
 import com.android.mvp.AppInit;
 import com.android.mvp.net.NetError;
@@ -30,7 +30,7 @@ public class App extends Application {
 //        DebugDB.getAddressLog();
         AppUtils.init(this);
         AppInit.parmConfig(true,true,"","","XDroid");
-
+        MultiDex.install(this);
         XApi.registerProvider(new NetProvider() {
 
             @Override

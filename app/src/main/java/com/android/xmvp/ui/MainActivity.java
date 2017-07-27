@@ -36,7 +36,7 @@ public class MainActivity extends XActivity {
     List<Fragment> fragmentList = new ArrayList<>();
     String[] titles = {"首页", "干货", "妹子"};
 
-    XFragmentAdapter adapter;
+   public XFragmentAdapter adapter;
 
     @Override
     public void initData(Bundle savedInstanceState) {
@@ -44,8 +44,6 @@ public class MainActivity extends XActivity {
 //        setSupportActionBar(toolbar);
 //        setImmersionBar(R.color.colorPrimary);
 //        initImmersionBar();
-        bindNetService();
-        XLog.i("---","服务开启");
         fragmentList.clear();
         fragmentList.add(HomeFragment.newInstance());
         fragmentList.add(GanhuoFragment.newInstance());
@@ -59,6 +57,7 @@ public class MainActivity extends XActivity {
         viewPager.setOffscreenPageLimit(3);
 
         tabLayout.setupWithViewPager(viewPager);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -81,7 +80,6 @@ public class MainActivity extends XActivity {
         switch (item.getItemId()) {
             case R.id.action_droid:
                 AboutActivity.launch(context);
-                XLog.i("---","服务暂停");
                 break;
         }
         return super.onOptionsItemSelected(item);
